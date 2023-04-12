@@ -452,29 +452,6 @@ Function askMSWSAPPX {
 	
 }
 
-##########
-# Service Tweaks
-##########
-#Disabling Un nessessary Services For Gaming
-Function DISGaming {
-	Write-Output "Stopping and disabling Un nessessary Services For Gaming..."
-	$errpref = $ErrorActionPreference #save actual preference
-    	$ErrorActionPreference = "silentlycontinue"
-	Stop-Service "wisvc" -WarningAction SilentlyContinue
-	Set-Service "wisvc" -StartupType Disabled
-	Stop-Service "MapsBroker" -WarningAction SilentlyContinue
-	Set-Service "MapsBroker" -StartupType Disabled
-	Stop-Service "UmRdpService" -WarningAction SilentlyContinue
-	Set-Service "UmRdpService" -StartupType Disabled
-	Stop-Service "TrkWks" -WarningAction SilentlyContinue
-	Set-Service "TrkWks" -StartupType Disabled
-	Stop-Service "TermService" -WarningAction SilentlyContinue
-	Set-Service "TermService" -StartupType Disabled
-	Stop-Service "PcaSvc" -WarningAction SilentlyContinue
-	Set-Service "PcaSvc" -StartupType Disabled
-	$ErrorActionPreference = $errpref #restore previous preference
-}
-
 # Stop and disable Home Groups services - Not applicable to 1803 and newer or Server
 Function DisableHomeGroups {
 	Write-Output "Stopping and disabling Home Groups services..."
@@ -677,24 +654,7 @@ function Windows11Extra {
 #Add Utimate Power Plan And Activate It
 Function EnableUlimatePower {
 	Write-Output "Enabling and Activating Bitsum Highest Performance Power Plan..."
-	Invoke-WebRequest -Uri "https://git.io/JsWhn" -OutFile "$Env:windir\system32\Bitsum-Highest-Performance.pow" -ErrorAction SilentlyContinue
-	powercfg -import "$Env:windir\system32\Bitsum-Highest-Performance.pow" e6a66b66-d6df-666d-aa66-66f66666eb66 | Out-Null
-	powercfg -setactive e6a66b66-d6df-666d-aa66-66f66666eb66 | Out-Null
-}
-
-#Disable DMA memory protection and cores isolation ("virtualization-based protection").
-Function DisableDMA {
-        Write-Output "Disabling DMA memory protection and cores isolation..."
-	$errpref = $ErrorActionPreference #save actual preference
-        $ErrorActionPreference = "silentlycontinue"
-        bcdedit /set vsmlaunchtype Off | Out-Null
-        bcdedit /set vm No | Out-Null
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\FVE" | Out-Null -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\FVE" -Name "DisableExternalDMAUnderLock" -Type DWord -Value 0
-        New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" | Out-Null -ErrorAction SilentlyContinue
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" -Name "EnableVirtualizationBasedSecurity" -Type DWord -Value 0
-        Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DeviceGuard" -Name "HVCIMATRequired" -Type DWord -Value 0
-	$ErrorActionPreference = $errpref #restore previous preference
+	powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
 }
 
 #DaddyMadu Ultimate CLeaner
