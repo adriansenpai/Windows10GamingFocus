@@ -12,7 +12,7 @@
 #     Changelogs Moved to ReadMe File for better mangement. 
 #
 ##########
-$host.ui.RawUI.WindowTitle = "DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker"
+$host.ui.RawUI.WindowTitle = "Keidorian Windows 10 Debloater and Gaming Tweaker"
 cmd /c 'title [DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker]'
 Write-Host 'Welcome to DaddyMadu Ultimate Windows 10 Debloater and Gaming Focus Tweaker';
 Write-Host "Please DISABLE your ANTIVIRUS to prevent any issues and PRESS any KEY to Continue!" -ForegroundColor Red -BackgroundColor Black
@@ -28,12 +28,12 @@ $tweaks = @(
 	### Chris Titus Tech Additions
 	"SlowUpdatesTweaks",
 	"Write-ColorOutput", #Utilizing Colors for better Warning messages!
-	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
+	#"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 	
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
-	"askDefender",
-	"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
+	#"askDefender",
+	#"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
 	"askXBOX",
 	#"Windows11Extra",
 	#"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
@@ -44,115 +44,115 @@ $tweaks = @(
 
 	### Privacy Tweaks ###
 	"DisableTelemetry",             # "EnableTelemetry",
-	"DisableWiFiSense",             # "EnableWiFiSense",
-	"DisableSmartScreen",         # "EnableSmartScreen",
-	"DisableWebSearch",             # "EnableWebSearch",
-	"DisableAppSuggestions",        # "EnableAppSuggestions",
-	"DisableActivityHistory",       # "EnableActivityHistory",
-	"EnableBackgroundApps",           #"DisableBackgroundApps",
-	"DisableLocationTracking",      # "EnableLocationTracking",
+	#"DisableWiFiSense",             # "EnableWiFiSense",
+	#"DisableSmartScreen",         # "EnableSmartScreen",
+	#"DisableWebSearch",             # "EnableWebSearch",
+	#"DisableAppSuggestions",        # "EnableAppSuggestions",
+	#"DisableActivityHistory",       # "EnableActivityHistory",
+	#"EnableBackgroundApps",           
+	#"DisableBackgroundApps",
+	#"DisableLocationTracking",      # "EnableLocationTracking",
 	"DisableMapUpdates",            # "EnableMapUpdates",
-	"DisableFeedback",              # "EnableFeedback",
-	"DisableTailoredExperiences",   # "EnableTailoredExperiences",
-	"DisableAdvertisingID",         # "EnableAdvertisingID",
+	#"DisableFeedback",              # "EnableFeedback",
+	#"DisableTailoredExperiences",   # "EnableTailoredExperiences",
+	#"DisableAdvertisingID",         # "EnableAdvertisingID",
 	"DisableCortana",               # "EnableCortana",
-	"DisableErrorReporting",        # "EnableErrorReporting",
-	"SetP2PUpdateLocal",          # "SetP2PUpdateInternet",
-	"DisableDiagTrack",             # "EnableDiagTrack",
-	"DisableWAPPush",               # "EnableWAPPush",
+	#"DisableErrorReporting",        # "EnableErrorReporting",
+	#"SetP2PUpdateLocal",          # "SetP2PUpdateInternet",
+	#"DisableDiagTrack",             # "EnableDiagTrack",
+	#"DisableWAPPush",               # "EnableWAPPush",
 	"DisableNewsFeed",
 
 	### Security Tweaks ###
-	"SetUACLow",                  # "SetUACHigh",
+	#"SetUACLow",                  # "SetUACHigh",
 	# "EnableSharingMappedDrives",  # "DisableSharingMappedDrives",
 	# "DisableAdminShares",           # "EnableAdminShares",
 	"DisableSMB1",                # "EnableSMB1",
 	# "DisableSMBServer",           # "EnableSMBServer",
 	# "DisableLLMNR",               # "EnableLLMNR",
-	"SetCurrentNetworkPrivate",     # "SetCurrentNetworkPublic",
-	"SetUnknownNetworksPrivate",  # "SetUnknownNetworksPublic",
-	"DisableNetDevicesAutoInst",  # "EnableNetDevicesAutoInst",
-	"EnableF8BootMenu",             # "DisableF8BootMenu",
+	#"SetCurrentNetworkPrivate",     # "SetCurrentNetworkPublic",
+	#"SetUnknownNetworksPrivate",  # "SetUnknownNetworksPublic",
+	#"DisableNetDevicesAutoInst",  # "EnableNetDevicesAutoInst",
 	#"SetDEPOptOut",                 # "SetDEPOptIn",
 	# "EnableCIMemoryIntegrity",    # "DisableCIMemoryIntegrity",
 	#"DisableScriptHost",            # "EnableScriptHost",
 	#"EnableDotNetStrongCrypto",     # "DisableDotNetStrongCrypto",
-	"DisableMeltdownCompatFlag", # "EnableMeltdownCompatFlag"    
+	#"DisableMeltdownCompatFlag", # "EnableMeltdownCompatFlag"    
 
 	### Service Tweaks ###
-	"EnableUpdateMSRT",          # "EnableUpdateMSRT",    #"DisableUpdateMSRT",
-	"EnableUpdateDriver",        # "EnableUpdateDriver",  #"DisableUpdateDriver",
-	"DisableUpdateRestart",         # "EnableUpdateRestart",
+	#"EnableUpdateMSRT",          # "EnableUpdateMSRT",    #"DisableUpdateMSRT",
+	#"EnableUpdateDriver",        # "EnableUpdateDriver",  #"DisableUpdateDriver",
+	#"DisableUpdateRestart",         # "EnableUpdateRestart",
 	"DisableHomeGroups",          # "EnableHomeGroups",
-	"EnableSharedExperiences",     # "SharedExperiences",
-	"DisableRemoteAssistance",      # "EnableRemoteAssistance",
-	"EnableRemoteDesktop",          # "DisableRemoteDesktop",
-	"DisableAutoplay",              # "EnableAutoplay",
-	"DisableAutorun",               # "EnableAutorun",
-	"DisableStorageSense",        # "EnableStorageSense",
-	"DisableDefragmentation",     # "EnableDefragmentation",
-	"DisableSuperfetch",          # "EnableSuperfetch",
-	"EnableIndexing",
+	"DisableSharedExperiences",     # "SharedExperiences",
+	#"DisableRemoteAssistance",      # "EnableRemoteAssistance",
+	#"EnableRemoteDesktop",          # "DisableRemoteDesktop",
+	#"DisableAutoplay",              # "EnableAutoplay",
+	#"DisableAutorun",               # "EnableAutorun",
+	#"DisableStorageSense",        # "EnableStorageSense",
+	#"DisableDefragmentation",     # "EnableDefragmentation",
+	#"DisableSuperfetch",          # "EnableSuperfetch",
+	#"EnableIndexing",
 	"DisableHibernation",		# "EnableHibernation",
 	"DisableFastStartup",         # "EnableFastStartup",
 	"DISGaming",
 
 
     ### Windows Tweaks ###
-	"PowerThrottlingOff",
-	"Win32PrioritySeparation",
-	"DisableAERO",
-	"BSODdetails",
-	"Disablelivetiles",
-	"wallpaperquality",
-	"DisableShistory",
-	"Disableshortcutword",
-	"DisableMouseKKS",
-	"DisableTransparency",
-	"TurnOffSafeSearch",
+	#"PowerThrottlingOff",
+	#"Win32PrioritySeparation",
+	#"DisableAERO",
+	#"BSODdetails",
+	#"Disablelivetiles",
+	#"wallpaperquality",
+	#"DisableShistory",
+	#"Disableshortcutword",
+	#"DisableMouseKKS",
+	#"DisableTransparency",
+	#"TurnOffSafeSearch",
 	"DisableCloudSearch",
-	"DisableDeviceHistory",
-	"DisableRemoteAssistance",
-	"DisableSearchHistroy",
-	"RemoveMeet",
+	#"DisableDeviceHistory",
+	#"DisableRemoteAssistance",
+	#"DisableSearchHistroy",
+	#"RemoveMeet",
 	
 	
 	### UI Tweaks ###
 	"DisableStickyKeys",            # "EnableStickyKeys",
-	"SetVisualFXPerformance",     # "SetVisualFXAppearance",
+	#"SetVisualFXPerformance",     # "SetVisualFXAppearance",
 	# "AddENKeyboard",              # "RemoveENKeyboard",
-	"EnableNumlock",             	# "DisableNumlock",
-	"Stop-EdgePDF",
+	#"EnableNumlock",             	# "DisableNumlock",
+	#"Stop-EdgePDF",
 
 	### Explorer UI Tweaks ###
-	"EnableThumbnails",          # "EnableThumbnails", # "DisableThumbnails",
-	"EnableThumbsDB",              # "EnableThumbsDB", # "DisableThumbsDB", 
+	#"EnableThumbnails",          # "EnableThumbnails", # "DisableThumbnails",
+	#"EnableThumbsDB",              # "EnableThumbsDB", # "DisableThumbsDB", 
 
 	### Application Tweaks ###
-	"DisableAdobeFlash",            # "EnableAdobeFlash",
+	#"DisableAdobeFlash",            # "EnableAdobeFlash",
 	#"UninstallMediaPlayer",         #"InstallMediaPlayer",
-	"UninstallInternetExplorer",  # "InstallInternetExplorer",
-	"UninstallWorkFolders",       # "InstallWorkFolders",
-	"UninstallLinuxSubsystem",      # "UninstallLinuxSubsystem",     #"InstallLinuxSubsystem",
+	#"UninstallInternetExplorer",  # "InstallInternetExplorer",
+	#"UninstallWorkFolders",       # "InstallWorkFolders",
+	#"UninstallLinuxSubsystem",      # "UninstallLinuxSubsystem",     #"InstallLinuxSubsystem",
 	# "InstallHyperV",              # "UninstallHyperV",
-	"InstallPDFPrinter",		# "UninstallPDFPrinter",
+	#"InstallPDFPrinter",		# "UninstallPDFPrinter",
 	# "UninstallXPSPrinter",          # "InstallXPSPrinter",
 	# "RemoveFaxPrinter",             # "AddFaxPrinter",
 
         ### DaddyMadu Gaming Tweaks ###
-	"RawMouseInput",
-	"DetectnApplyMouseFIX",
-	"DisableHPET",
-	"EnableGameMode",
-	"EnableHAGS",
-	"DisableDMA",
-	"DisablePKM",
-	"DecreaseMKBuffer",
-	"StophighDPC",
-	"NetworkOptimizations",
-	"RemoveEdit3D",
-	"FixURLext",  # fix issue with games shortcut that created by games lunchers turned white!
-	"UltimateCleaner",
+	#"RawMouseInput",
+	#"DetectnApplyMouseFIX",
+	#"DisableHPET",
+	#"EnableGameMode",
+	#"EnableHAGS",
+	#"DisableDMA",
+	#"DisablePKM",
+	#"DecreaseMKBuffer",
+	#"StophighDPC",
+	#"NetworkOptimizations",
+	#"RemoveEdit3D",
+	#"FixURLext",  # fix issue with games shortcut that created by games lunchers turned white!
+	#"UltimateCleaner",
 	"Finished"
 	### Auxiliary Functions ###
 )
@@ -299,26 +299,12 @@ Function DisableTelemetry {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEverEnabled" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SilentInstalledAppsEnabled" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338387Enabled" -Type DWord -Value 0
-		Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338388Enabled" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338389Enabled" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 0
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 0
-	
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\ProgramDataUpdater" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Autochk\Proxy" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" | Out-Null
-	Disable-ScheduledTask -TaskName "Microsoft\Windows\Feedback\Siuf\DmClient" | Out-Null
-	Disable-ScheduledTask -TaskName "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" | Out-Null
-	Disable-ScheduledTask -TaskName "Microsoft\Windows\Windows Error Reporting\QueueReporting" | Out-Null
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
