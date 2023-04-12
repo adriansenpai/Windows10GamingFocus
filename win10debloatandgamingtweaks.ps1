@@ -93,10 +93,7 @@ $tweaks = @(
 	"DisableDefragmentation",     # "EnableDefragmentation",
 	"DisableSuperfetch",          # "EnableSuperfetch",
 	"EnableIndexing",
-	"SetBIOSTimeUTC",         #"SetBIOSTimeUTC", #"SetBIOSTimeLocal",
 	"DisableHibernation",		# "EnableHibernation",
-	"EnableSleepButton",		# "DisableSleepButton",         
-	"DisableSleepTimeout",        # "EnableSleepTimeout",
 	"DisableFastStartup",         # "EnableFastStartup",
 	"DISGaming",
 
@@ -122,19 +119,6 @@ $tweaks = @(
 	
 	### UI Tweaks ###
 	"DisableStickyKeys",            # "EnableStickyKeys",
-	"ShowTaskManagerDetails"        # "HideTaskManagerDetails",
-	"ShowFileOperationsDetails",    # "HideFileOperationsDetails",
-	"DisableFileDeleteConfirm",	# "EnableFileDeleteConfirm",    
-	"HideTaskbarSearch",
-	#"ShowTaskbarSearchIcon",      # "ShowTaskbarSearchBox",
-	"HideTaskView",                 # "ShowTaskView",
-	# "ShowSmallTaskbarIcons",        # "ShowLargeTaskbarIcons",
-	# "SetTaskbarCombineWhenFull",    # "SetTaskbarCombineNever",     # "SetTaskbarCombineAlways",
-	"HideTaskbarPeopleIcon",        # "ShowTaskbarPeopleIcon",
-	#"HideTrayIcons",                #"ShowTrayIcons",
-	"DisableSearchAppInStore",      # "EnableSearchAppInStore",
-	"DisableNewAppPrompt",          # "EnableNewAppPrompt",
-	# "SetControlPanelSmallIcons",  # "SetControlPanelLargeIcons",  # "SetControlPanelCategories",
 	"SetVisualFXPerformance",     # "SetVisualFXAppearance",
 	# "AddENKeyboard",              # "RemoveENKeyboard",
 	"EnableNumlock",             	# "DisableNumlock",
@@ -315,12 +299,26 @@ Function DisableTelemetry {
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection" -Name "AllowTelemetry" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "ContentDeliveryAllowed" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "OemPreInstalledAppsEnabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEnabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "PreInstalledAppsEverEnabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SilentInstalledAppsEnabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338387Enabled" -Type DWord -Value 0
+		Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338388Enabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-338389Enabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SubscribedContent-353698Enabled" -Type DWord -Value 0
+	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" -Name "SystemPaneSuggestionsEnabled" -Type DWord -Value 0
+	
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\Microsoft Compatibility Appraiser" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Application Experience\ProgramDataUpdater" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Autochk\Proxy" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\Consolidator" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\Customer Experience Improvement Program\UsbCeip" | Out-Null
 	Disable-ScheduledTask -TaskName "Microsoft\Windows\DiskDiagnostic\Microsoft-Windows-DiskDiagnosticDataCollector" | Out-Null
+	Disable-ScheduledTask -TaskName "Microsoft\Windows\Feedback\Siuf\DmClient" | Out-Null
+	Disable-ScheduledTask -TaskName "Microsoft\Windows\Feedback\Siuf\DmClientOnScenarioDownload" | Out-Null
+	Disable-ScheduledTask -TaskName "Microsoft\Windows\Windows Error Reporting\QueueReporting" | Out-Null
 	$ErrorActionPreference = $errpref #restore previous preference
 }
 
@@ -2149,92 +2147,90 @@ Function DebloatAll {
 cls
     $Bloatware = @(
     #Unnecessary Windows 10 AppX Apps
-    "*3DBuilder*"
-    "*AppConnector*"
-    "*BingFinance*"
-    "*BingNews*"
-    "*BingSports*"
-    "*BingTranslator*"
-    "*BingWeather*"
-    "*GetHelp*"
-    "*Getstarted*"
-    "*Messaging*"
-    "*Microsoft3DViewer*"
-    "*MicrosoftSolitaireCollection*"
-    "*MicrosoftPowerBIForWindows*"
-    "*MicrosoftStickyNotes*"
-    "*NetworkSpeedTest*"
-    "*OneNote*"
-    "*Lens*"
-    "*Sway*"
-    "*OneConnect*"
-    "*People*"
-    "*Print3D*"
-    "*RemoteDesktop*"
-    "*SkypeApp*"
-    "*Wallet*"
-    "*Whiteboard*"
-    "*WindowsAlarms*"
-    "*WindowsFeedbackHub*"
-    "*WindowsMaps*"
-    "*WindowsPhone*"
-    "*WindowsSoundRecorder*"
-    "*MicrosoftOfficeHub*"
-    "*MixedReality.Portal*"
-    "*ScreenSketch*"
-    "*MicrosoftOfficeHub*"
-    "*Microsoft.MSPaint*"
-    "Microsoft.549981C3F5F10"
-    "*Advertising.Xaml*"
-    "*SolitaireCollection*"
-    "*YourPhone*"
-		
+      "*Microsoft.Microsoft3DViewer*",
+      "*Microsoft.AppConnector*",
+      "*Microsoft.BingFinance*",
+      "*Microsoft.BingNews*",
+      "*Microsoft.BingSports*",
+      "*Microsoft.BingTranslator*",
+      "*Microsoft.BingWeather*",
+      "*Microsoft.BingFoodAndDrink*",
+      "*Microsoft.BingHealthAndFitness*",
+      "*Microsoft.BingTravel*",
+      "*Microsoft.MinecraftUWP*",
+      "*Microsoft.GamingServices*",
+      "*Microsoft.GetHelp*",
+      "*Microsoft.Getstarted*",
+      "*Microsoft.Messaging*",
+      "*Microsoft.Microsoft3DViewer*",
+      "*Microsoft.MicrosoftSolitaireCollection*",
+      "*Microsoft.NetworkSpeedTest*",
+      "*Microsoft.News*",
+      "*Microsoft.Office.Lens*",
+      "*Microsoft.Office.Sway*",
+      "*Microsoft.Office.OneNote*",
+      "*Microsoft.OneConnect*",
+      "*Microsoft.People*",
+      "*Microsoft.Print3D*",
+      "*Microsoft.SkypeApp*",
+      "*Microsoft.Wallet*",
+      "*Microsoft.Whiteboard*",
+      "*Microsoft.WindowsAlarms*",
+      "*microsoft.windowscommunicationsapps*",
+      "*Microsoft.WindowsFeedbackHub*",
+      "*Microsoft.WindowsMaps*",
+      "*Microsoft.WindowsPhone*",
+      "*Microsoft.WindowsSoundRecorder*",
+      "*Microsoft.XboxApp*",
+      "*Microsoft.ConnectivityStore*",
+      "*Microsoft.CommsPhone*",
+      "*Microsoft.ScreenSketch*",
+      "*Microsoft.Xbox.TCUI*",
+      "*Microsoft.XboxGameOverlay*",
+      "*Microsoft.XboxGameCallableUI*",
+      "*Microsoft.XboxSpeechToTextOverlay*",
+      "*Microsoft.MixedReality.Portal*",
+      "*Microsoft.XboxIdentityProvider*",
+      "*Microsoft.ZuneMusic*",
+      "*Microsoft.ZuneVideo*",
+      "*Microsoft.Getstarted*",
+      "*Microsoft.MicrosoftOfficeHub*",
+      
+      		
         #Sponsored Windows 10 AppX Apps
         #Add sponsored/featured apps to remove in the "*AppName*" format
+	
+      "*EclipseManager*",
+      "*ActiproSoftwareLLC*",
+      "*AdobeSystemsIncorporated.AdobePhotoshopExpress*",
+      "*Duolingo-LearnLanguagesforFree*",
+      "*PandoraMediaInc*",
+      "*CandyCrush*",
+      "*BubbleWitch3Saga*",
+      "*Wunderlist*",
+      "*Flipboard*",
+      "*Twitter*",
+      "*Facebook*",
+      "*Royal Revolt*",
+      "*Sway*",
+      "*Speed Test*",
+      "*Dolby*",
+      "*Viber*",
+      "*ACGMediaPlayer*",
+      "*Netflix*",
+      "*OneCalendar*",
+      "*LinkedInforWindows*",
+      "*HiddenCityMysteryofShadows*",
+      "*Hulu*",
+      "*HiddenCity*",
+      "*AdobePhotoshopExpress*",
+      "*HotspotShieldFreeVPN*",
+      "*Microsoft.Advertising.Xaml*"
 		
-        "*EclipseManager*"
-        "*ActiproSoftwareLLC*"
-        "*AdobePhotoshopExpress*"
-        "*Duolingo-LearnLanguagesforFree*"
-        "*PandoraMediaInc*"
-        "*CandyCrush*"
-        "*BubbleWitch3Saga*"
-        "*Wunderlist*"
-        "*Flipboard*"
-        "*Twitter*"
-        "*Facebook*"
-        "*Royal Revolt*"
-        "*Sway*"
-        "*Speed Test*"
-        "*Viber*"
-        "*ACGMediaPlayer*"
-        "*Netflix*"
-        "*OneCalendar*"
-        "*LinkedInforWindows*"
-        "*HiddenCityMysteryofShadows*"
-        "*Hulu*"
-        "*HiddenCity*"
-        "*AdobePhotoshopExpress*"
-	"*RoyalRevolt2*"
-	"*AutodeskSketchBook*"
-	"*DisneyMagicKingdoms*"
-	"*MarchofEmpires*"
-	"*Plex*"
-	"*FarmVille2CountryEscape*"
-	"*CyberLinkMediaSuiteEssentials*"
-	"*DrawboardPDF*"
-	"*Asphalt8Airborne*"
-	"*Keeper*"
-	"*SpotifyMusic*"
-	"*WinZipUniversal*"
-	"*XING*"           
-        "*Advertising.Xaml*"
-        "*Advertising.Xaml*"
-    	"*Roblox*"
     )
     foreach ($Bloat in $Bloatware) {
 	$errpref = $ErrorActionPreference #save actual preference
-    $ErrorActionPreference = "silentlycontinue"
+   	 $ErrorActionPreference = "silentlycontinue"
         Get-AppxPackage -AllUsers -Name $Bloat| Remove-AppxPackage | Out-Null -ErrorAction SilentlyContinue
         Get-AppxProvisionedPackage -Online | Where-Object DisplayName -like $Bloat | Remove-AppxProvisionedPackage -Online | Out-Null -ErrorAction SilentlyContinue
 	$ErrorActionPreference = $errpref #restore previous preference
