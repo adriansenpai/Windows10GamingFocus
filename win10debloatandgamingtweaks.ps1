@@ -28,7 +28,6 @@ $tweaks = @(
 	### Chris Titus Tech Additions
 	"SlowUpdatesTweaks",
 	"Write-ColorOutput", #Utilizing Colors for better Warning messages!
-	"InstallChocoUpdates",
 	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 	
@@ -36,7 +35,7 @@ $tweaks = @(
 	"askDefender",
 	"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
 	"askXBOX",
-	"Windows11Extra",
+	#"Windows11Extra",
 	#"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
 	#"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
 
@@ -122,11 +121,6 @@ $tweaks = @(
 	
 	
 	### UI Tweaks ###
-	"EnableActionCenter",          # "DisableActionCenter",
-	"EnableLockScreen",				# "DisableLockScreen",
-	"EnableLockScreenRS1",			# "DisableLockScreenRS1",
-	# "HideNetworkFromLockScreen",    # "ShowNetworkOnLockScreen",
-	# "HideShutdownFromLockScreen",   # "ShowShutdownOnLockScreen",
 	"DisableStickyKeys",            # "EnableStickyKeys",
 	"ShowTaskManagerDetails"        # "HideTaskManagerDetails",
 	"ShowFileOperationsDetails",    # "HideFileOperationsDetails",
@@ -144,31 +138,9 @@ $tweaks = @(
 	"SetVisualFXPerformance",     # "SetVisualFXAppearance",
 	# "AddENKeyboard",              # "RemoveENKeyboard",
 	"EnableNumlock",             	# "DisableNumlock",
-	"EnableDarkMode",				# "DisableDarkMode",
 	"Stop-EdgePDF",
 
 	### Explorer UI Tweaks ###
-	"ShowKnownExtensions",          # "HideKnownExtensions",
-	"HideHiddenFiles",
-	"HideSyncNotifications"         # "ShowSyncNotifications",
-	"HideRecentShortcuts",          # "ShowRecentShortcuts",
-	"SetExplorerThisPC",            # "SetExplorerQuickAccess",
-	"ShowThisPCOnDesktop",          # "HideThisPCFromDesktop",
-	"ShowUserFolderOnDesktop",    # "HideUserFolderFromDesktop",
-	# "HideDesktopFromThisPC",        # "ShowDesktopInThisPC",
-	# "HideDesktopFromExplorer",    # "ShowDesktopInExplorer",
-	# "HideDocumentsFromThisPC",      # "ShowDocumentsInThisPC",
-	# "HideDocumentsFromExplorer",  # "ShowDocumentsInExplorer",
-	# "HideDownloadsFromThisPC",      # "ShowDownloadsInThisPC",
-	# "HideDownloadsFromExplorer",  # "ShowDownloadsInExplorer",
-	#"ShowMusicInThisPC",          #"HideMusicFromThisPC",
-	#"ShowMusicInExplorer",       #"HideMusicFromExplorer",
-	# "HidePicturesFromThisPC",       # "ShowPicturesInThisPC",
-	# "HidePicturesFromExplorer",   # "ShowPicturesInExplorer",
-	#"ShowVideosInThisPC",         #"HideVideosFromThisPC",
-	#"ShowVideosInExplorer",        #"HideVideosFromExplorer",
-	"Hide3DObjectsFromThisPC",      # "Show3DObjectsInThisPC",
-	"Hide3DObjectsFromExplorer",  # "Show3DObjectsInExplorer",
 	"EnableThumbnails",          # "EnableThumbnails", # "DisableThumbnails",
 	"EnableThumbsDB",              # "EnableThumbsDB", # "DisableThumbsDB", 
 
@@ -179,38 +151,20 @@ $tweaks = @(
 	"UninstallWorkFolders",       # "InstallWorkFolders",
 	"UninstallLinuxSubsystem",      # "UninstallLinuxSubsystem",     #"InstallLinuxSubsystem",
 	# "InstallHyperV",              # "UninstallHyperV",
-	"SetPhotoViewerAssociation",    # "UnsetPhotoViewerAssociation",
-	"AddPhotoViewerOpenWith",       # "RemovePhotoViewerOpenWith",
 	"InstallPDFPrinter",		# "UninstallPDFPrinter",
 	# "UninstallXPSPrinter",          # "InstallXPSPrinter",
 	# "RemoveFaxPrinter",             # "AddFaxPrinter",
-	"SVCHostTweak",
 
-	### Unpinning ###
-	"UnpinStartMenuTiles",
-
-        ### DaddyMadu Quality Of Life Tweaks ###
-	"QOL",
-	
         ### DaddyMadu Gaming Tweaks ###
-	"FullscreenOptimizationFIX",
-	"GameOptimizationFIX",
-	"ApplyPCOptimizations",
 	"RawMouseInput",
 	"DetectnApplyMouseFIX",
 	"DisableHPET",
 	"EnableGameMode",
 	"EnableHAGS",
-	"DisableCoreParking",
 	"DisableDMA",
 	"DisablePKM",
-	"DisallowDIP",
-	"UseBigM",
-	"ForceContiguousM",
 	"DecreaseMKBuffer",
 	"StophighDPC",
-	"NvidiaTweaks",
-	"AMDGPUTweaks",
 	"NetworkOptimizations",
 	"RemoveEdit3D",
 	"FixURLext",  # fix issue with games shortcut that created by games lunchers turned white!
@@ -1274,40 +1228,6 @@ Function EnableIndexing {
 	Start-Service "WSearch" -WarningAction SilentlyContinue
 }
 
-# Set BIOS time to UTC #sc.exe config w32time start= delayed-auto#
-Function SetBIOSTimeUTC {
-	Write-Output "Setting BIOS time to UTC..."
-	Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -Type DWord -Value 1
-	Push-Location
-        Set-Location HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers
-        Set-ItemProperty . 0 "time.google.com"
-        Set-ItemProperty . "(Default)" "0"
-        Set-Location HKLM:\SYSTEM\CurrentControlSet\services\W32Time\Parameters
-        Set-ItemProperty . NtpServer "time.google.com"
-        Pop-Location
-        Stop-Service w32time
-	sc.exe config w32time start= auto
-        Start-Service w32time
-	W32tm /resync /force /nowait
-}
-
-# Set BIOS time to local time
-Function SetBIOSTimeLocal {
-	Write-Output "Setting BIOS time to Local time..."
-	Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation" -Name "RealTimeIsUniversal" -ErrorAction SilentlyContinue
-	Push-Location
-        Set-Location HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\DateTime\Servers
-        Set-ItemProperty . 0 "time.google.com"
-        Set-ItemProperty . "(Default)" "0"
-        Set-Location HKLM:\SYSTEM\CurrentControlSet\services\W32Time\Parameters
-        Set-ItemProperty . NtpServer "time.google.com"
-        Pop-Location
-        Stop-Service w32time
-	sc.exe config w32time start= auto
-        Start-Service w32time
-	W32tm /resync /force /nowait
-}
-
 # Enable Hibernation - Do not use on Server with automatically started Hyper-V hvboot service as it may lead to BSODs (Win10 with Hyper-V is fine)
 Function EnableHibernation {
 	Write-Output "Enabling Hibernation..."
@@ -1326,46 +1246,6 @@ Function DisableHibernation {
 		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
 	}
 	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowHibernateOption" -Type Dword -Value 0
-}
-
-# Disable Sleep start menu and keyboard button
-Function DisableSleepButton {
-	Write-Output "Disabling Sleep start menu and keyboard button..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
-		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowSleepOption" -Type Dword -Value 0
-	powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 0
-	powercfg /SETDCVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 0
-}
-
-# Enable Sleep start menu and keyboard button
-Function EnableSleepButton {
-	Write-Output "Enabling Sleep start menu and keyboard button..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings")) {
-		New-Item -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\FlyoutMenuSettings" -Name "ShowSleepOption" -Type Dword -Value 1
-	powercfg /SETACVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 1
-	powercfg /SETDCVALUEINDEX SCHEME_CURRENT SUB_BUTTONS SBUTTONACTION 1
-}
-
-# Disable display and sleep mode timeouts
-Function DisableSleepTimeout {
-	Write-Output "Disabling display and sleep mode timeouts..."
-	powercfg /X monitor-timeout-ac 0
-	powercfg /X monitor-timeout-dc 0
-	powercfg /X standby-timeout-ac 0
-	powercfg /X standby-timeout-dc 0
-}
-
-# Enable display and sleep mode timeouts
-Function EnableSleepTimeout {
-	Write-Output "Enabling display and sleep mode timeouts..."
-	powercfg /X monitor-timeout-ac 10
-	powercfg /X monitor-timeout-dc 5
-	powercfg /X standby-timeout-ac 30
-	powercfg /X standby-timeout-dc 15
 }
 
 # Disable Fast Startup
@@ -1414,12 +1294,6 @@ Function Disablelivetiles {
 	Write-Output "Disabling live tiles..."
 	New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" -ErrorAction SilentlyContinue | Out-Null
 	Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "NoTileApplicationNotification" -Type DWord -Value 1
-}
-
-#Setting Wallpaper Quality to 100%.
-Function wallpaperquality {
-	Write-Output "Setting Wallpaper Quality to 100%..."
-	Set-ItemProperty -Path "HKCU:\Control Panel\Desktop" -Name "JPEGImportQuality" -Type DWord -Value 100
 }
 
 #Disabling search history.
@@ -1495,84 +1369,6 @@ Function RemoveMeet {
 # UI Tweaks
 ##########
 
-# Disable Action Center
-Function DisableActionCenter {
-	Write-Output "Disabling Action Center..."
-	If (!(Test-Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
-		New-Item -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
-	}
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -Type DWord -Value 0
-}
-
-# Enable Action Center
-Function EnableActionCenter {
-	Write-Output "Enabling Action Center..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "DisableNotificationCenter" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\PushNotifications" -Name "ToastEnabled" -ErrorAction SilentlyContinue
-}
-
-# Disable Lock screen
-Function DisableLockScreen {
-	Write-Output "Disabling Lock screen..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreen" -Type DWord -Value 1
-}
-
-# Enable Lock screen
-Function EnableLockScreen {
-	Write-Output "Enabling Lock screen..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Personalization" -Name "NoLockScreen" -ErrorAction SilentlyContinue
-}
-
-# Disable Lock screen (Anniversary Update workaround) - Applicable to 1607 - 1803 (The GPO used in DisableLockScreen has been fixed again in 1803)
-Function DisableLockScreenRS1 {
-	Write-Output "Disabling Lock screen using scheduler workaround..."
-	$service = New-Object -com Schedule.Service
-	$service.Connect()
-	$task = $service.NewTask(0)
-	$task.Settings.DisallowStartIfOnBatteries = $false
-	$trigger = $task.Triggers.Create(9)
-	$trigger = $task.Triggers.Create(11)
-	$trigger.StateChange = 8
-	$action = $task.Actions.Create(0)
-	$action.Path = "reg.exe"
-	$action.Arguments = "add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\LogonUI\SessionData /t REG_DWORD /v AllowLockScreen /d 0 /f"
-	$service.GetFolder("\").RegisterTaskDefinition("Disable LockScreen", $task, 6, "NT AUTHORITY\SYSTEM", $null, 4) | Out-Null
-}
-
-# Enable Lock screen (Anniversary Update workaround) - Applicable to 1607 - 1803
-Function EnableLockScreenRS1 {
-	Write-Output "Enabling Lock screen (removing scheduler workaround)..."
-	Unregister-ScheduledTask -TaskName "Disable LockScreen" -Confirm:$false -ErrorAction SilentlyContinue
-}
-
-# Hide network options from Lock Screen
-Function HideNetworkFromLockScreen {
-	Write-Output "Hiding network options from Lock Screen..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "DontDisplayNetworkSelectionUI" -Type DWord -Value 1
-}
-
-# Show network options on lock screen
-Function ShowNetworkOnLockScreen {
-	Write-Output "Showing network options on Lock Screen..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\System" -Name "DontDisplayNetworkSelectionUI" -ErrorAction SilentlyContinue
-}
-
-# Hide shutdown options from Lock Screen
-Function HideShutdownFromLockScreen {
-	Write-Output "Hiding shutdown options from Lock Screen..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ShutdownWithoutLogon" -Type DWord -Value 0
-}
-
-# Show shutdown options on lock screen
-Function ShowShutdownOnLockScreen {
-	Write-Output "Showing shutdown options on Lock Screen..."
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" -Name "ShutdownWithoutLogon" -Type DWord -Value 1
-}
-
 # Disable Sticky keys prompt
 Function DisableStickyKeys {
 	Write-Output "Disabling Sticky keys prompt..."
@@ -1583,206 +1379,6 @@ Function DisableStickyKeys {
 Function EnableStickyKeys {
 	Write-Output "Enabling Sticky keys prompt..."
 	Set-ItemProperty -Path "HKCU:\Control Panel\Accessibility\StickyKeys" -Name "Flags" -Type String -Value "510"
-}
-
-# Show Task Manager details - Applicable to 1607 and later - Although this functionality exist even in earlier versions, the Task Manager's behavior is different there and is not compatible with this tweak
-Function ShowTaskManagerDetails {
-If ([System.Environment]::OSVersion.Version.Build -ge 22000) {
-} Else {
-	Write-Output "Showing task manager details..."
-	$taskmgr = Start-Process -WindowStyle Hidden -FilePath taskmgr.exe -PassThru
-	Do {
-		Start-Sleep -Milliseconds 100
-		$preferences = Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -ErrorAction SilentlyContinue
-	} Until ($preferences)
-	Stop-Process $taskmgr
-	$preferences.Preferences[28] = 0
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -Type Binary -Value $preferences.Preferences
-  }
-}
-
-# Hide Task Manager details
-Function HideTaskManagerDetails {
-	Write-Output "Hiding task manager details..."
-	$preferences = Get-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -ErrorAction SilentlyContinue
-	If ($preferences) {
-		$preferences.Preferences[28] = 1
-		Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\TaskManager" -Name "Preferences" -Type Binary -Value $preferences.Preferences
-	}
-}
-
-# Show file operations details
-Function ShowFileOperationsDetails {
-	Write-Output "Showing file operations details..."
-	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager")) {
-		New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" | Out-Null
-	}
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -Type DWord -Value 1
-}
-
-# Hide file operations details
-Function HideFileOperationsDetails {
-	Write-Output "Hiding file operations details..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\OperationStatusManager" -Name "EnthusiastMode" -ErrorAction SilentlyContinue
-}
-
-# Enable file delete confirmation dialog
-Function EnableFileDeleteConfirm {
-	Write-Output "Enabling file delete confirmation dialog..."
-	If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer")) {
-		New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" | Out-Null
-	}
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "ConfirmFileDelete" -Type DWord -Value 1
-}
-
-# Disable file delete confirmation dialog
-Function DisableFileDeleteConfirm {
-	Write-Output "Disabling file delete confirmation dialog..."
-	Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" -Name "ConfirmFileDelete" -ErrorAction SilentlyContinue
-}
-
-# Hide Taskbar Search icon / box
-Function HideTaskbarSearch {
-	Write-Output "Hiding Taskbar Search icon / box..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 0
-}
-
-# Show Taskbar Search icon
-Function ShowTaskbarSearchIcon {
-	Write-Output "Showing Taskbar Search icon..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 1
-}
-
-# Show Taskbar Search box
-Function ShowTaskbarSearchBox {
-	Write-Output "Showing Taskbar Search box..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" -Name "SearchboxTaskbarMode" -Type DWord -Value 2
-}
-
-# Hide Task View button
-Function HideTaskView {
-	Write-Output "Hiding Task View button..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -Type DWord -Value 0
-}
-
-# Show Task View button
-Function ShowTaskView {
-	Write-Output "Showing Task View button..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "ShowTaskViewButton" -ErrorAction SilentlyContinue
-}
-
-# Show small icons in taskbar
-Function ShowSmallTaskbarIcons {
-	Write-Output "Showing small icons in taskbar..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarSmallIcons" -Type DWord -Value 1
-}
-
-# Show large icons in taskbar
-Function ShowLargeTaskbarIcons {
-	Write-Output "Showing large icons in taskbar..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarSmallIcons" -ErrorAction SilentlyContinue
-}
-
-# Set taskbar buttons to show labels and combine when taskbar is full
-Function SetTaskbarCombineWhenFull {
-	Write-Output "Setting taskbar buttons to combine when taskbar is full..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarGlomLevel" -Type DWord -Value 1
-}
-
-# Set taskbar buttons to show labels and never combine
-Function SetTaskbarCombineNever {
-	Write-Output "Setting taskbar buttons to never combine..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarGlomLevel" -Type DWord -Value 2
-}
-
-# Set taskbar buttons to always combine and hide labels
-Function SetTaskbarCombineAlways {
-	Write-Output "Setting taskbar buttons to always combine, hide labels..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" -Name "TaskbarGlomLevel" -ErrorAction SilentlyContinue
-}
-
-# Hide Taskbar People icon
-Function HideTaskbarPeopleIcon {
-	Write-Output "Hiding People icon..."
-	If (!(Test-Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People")) {
-		New-Item -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" | Out-Null
-	}
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -Type DWord -Value 0
-}
-
-# Show Taskbar People icon
-Function ShowTaskbarPeopleIcon {
-	Write-Output "Showing People icon..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" -Name "PeopleBand" -ErrorAction SilentlyContinue
-}
-
-# Show all tray icons
-Function ShowTrayIcons {
-	Write-Output "Showing all tray icons..."
-	Set-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -Type DWord -Value 0
-}
-
-# Hide tray icons as needed
-Function HideTrayIcons {
-	Write-Output "Hiding tray icons..."
-	Remove-ItemProperty -Path "HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" -Name "EnableAutoTray" -ErrorAction SilentlyContinue
-}
-
-# Disable search for app in store for unknown extensions
-Function DisableSearchAppInStore {
-	Write-Output "Disabling search for app in store for unknown extensions..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoUseStoreOpenWith" -Type DWord -Value 1
-}
-
-# Enable search for app in store for unknown extensions
-Function EnableSearchAppInStore {
-	Write-Output "Enabling search for app in store for unknown extensions..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoUseStoreOpenWith" -ErrorAction SilentlyContinue
-}
-
-# Disable 'How do you want to open this file?' prompt
-Function DisableNewAppPrompt {
-	Write-Output "Disabling 'How do you want to open this file?' prompt..."
-	If (!(Test-Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer")) {
-		New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" | Out-Null
-	}
-	Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoNewAppAlert" -Type DWord -Value 1
-}
-
-# Enable 'How do you want to open this file?' prompt
-Function EnableNewAppPrompt {
-	Write-Output "Enabling 'How do you want to open this file?' prompt..."
-	Remove-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Explorer" -Name "NoNewAppAlert" -ErrorAction SilentlyContinue
-}
-
-# Set Control Panel view to Small icons (Classic)
-Function SetControlPanelSmallIcons {
-	Write-Output "Setting Control Panel view to small icons..."
-	If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel")) {
-		New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" | Out-Null
-	}
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "StartupPage" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "AllItemsIconView" -Type DWord -Value 1
-}
-
-# Set Control Panel view to Large icons (Classic)
-Function SetControlPanelLargeIcons {
-	Write-Output "Setting Control Panel view to large icons..."
-	If (!(Test-Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel")) {
-		New-Item -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" | Out-Null
-	}
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "StartupPage" -Type DWord -Value 1
-	Set-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "AllItemsIconView" -Type DWord -Value 0
-}
-
-# Set Control Panel view to categories
-Function SetControlPanelCategories {
-	Write-Output "Setting Control Panel view to categories..."
-	Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "StartupPage" -ErrorAction SilentlyContinue
-	Remove-ItemProperty -Path "HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\ControlPanel" -Name "AllItemsIconView" -ErrorAction SilentlyContinue
 }
 
 # Adjusts visual effects for performance - Disables animations, transparency etc. but leaves font smoothing and miniatures enabled
