@@ -26,15 +26,15 @@ $tweaks = @(
 	"RequireAdmin",
 	
 	### Chris Titus Tech Additions
-	"SlowUpdatesTweaks",
+	#"SlowUpdatesTweaks",
 	"Write-ColorOutput", #Utilizing Colors for better Warning messages!
-	#"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
+	"EnableUlimatePower",    # DaddyMadu don't change order it will break other functions! just disable if you want with #
 	# "ChangeDefaultApps", # Removed due to issues with steam and resetting default apps
 	
 	### DaddyMadu Windows Defender Settings! Don't Change Order Just Disable with # If You Don't want it ###
 	#"askDefender",
 	#"DorEOneDrive",                  #Option to Install Or Uninstall Microsoft One Drive!
-	"askXBOX",
+	#"askXBOX",
 	#"Windows11Extra",
 	#"askMSPPS",                      #Option to enable or disable Microsoft Software Protection Platform Service” Causing High CPU Usage
 	#"askMSWSAPPX",                   #Option to enable or disable Wsappx to Fix 100% Disk Usage in Windows 10 in older systems
@@ -57,8 +57,6 @@ $tweaks = @(
 	"DisableSharedExperiences",     # "SharedExperiences",
 	"DisableHibernation",		# "EnableHibernation",
 	"DisableFastStartup",         # "EnableFastStartup",
-	"DISGaming",
-
 
     ### Windows Tweaks ###
 	"DisableCloudSearch",
