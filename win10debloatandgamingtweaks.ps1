@@ -61,6 +61,7 @@ $tweaks = @(
 
     ### Windows Tweaks ###
 	"DisableCloudSearch",
+	"Win32PrioritySeparation",
 
     ### Game Tweaks ###
 	"EnableGameMode",
